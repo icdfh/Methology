@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Методологии управления проектами</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>Методологии управления проектами</h1>
+  <nav class="navbar">
+    <a href="waterfall.html">Waterfall</a>
+    <a href="agile.html">Agile</a>
+    <a href="scrum.html">Scrum</a>
+    <a href="kanban.html">Kanban</a>
+    <a href="tasks.html">Практическое задание</a>
+  </nav>
+</header>
+
+<!-- Фиксированная кнопка для открытия модального окна -->
+<button class="open-modal-btn-fixed" onclick="openModal()">Методологии управления</button>
+
+<main class="content-wrapper">
+  <section>
+    <h2>Добро пожаловать</h2>
+    <p>Этот сайт посвящен четырем основным методологиям управления проектами: Waterfall, Agile, Scrum и Kanban. Выберите интересующую вас методологию для подробного ознакомления и выполнения практических заданий.</p>
+    
+    <!-- Видео с YouTube -->
+    <div class="video-container">
+      <h3>Обзор методологий</h3>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/033cGh07N9Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    
+    <!-- Кнопка для скачивания Word-файла -->
+    <div class="download-container">
+      <h3>Скачать материалы</h3>
+      <a href="WordforUxUi.docx" download class="download-btn">Скачать руководство (Word)</a>
+    </div>
+  </section>
+</main>
+
+<!-- Модальное окно с информацией о методологиях -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Методологии управления проектами для UX/UI-дизайнеров</h2>
+    <p><strong>Waterfall (Каскадная модель)</strong></p>
+    <ul>
+      <li>Тщательное проектирование на старте...</li>
+      <li>Детализированная документация...</li>
+      <li>Отсутствие обратной связи во время разработки...</li>
+      <li><strong>Польза:</strong> Waterfall полезен для дизайнеров...</li>
+    </ul>
+    <p><strong>Agile (Гибкая методология)</strong></p>
+    <ul>
+      <li>Быстро адаптироваться к изменениям...</li>
+      <li>Работа в итерациях...</li>
+      <li>Постоянное сотрудничество...</li>
+      <li><strong>Польза:</strong> Agile дает дизайнеру гибкость...</li>
+    </ul>
+    <p><strong>Scrum (Методология в рамках Agile)</strong></p>
+    <ul>
+      <li>Работа в спринтах...</li>
+      <li>Роли и обратная связь...</li>
+      <li>Демонстрации и ретроспективы...</li>
+      <li><strong>Польза:</strong> Scrum помогает организовать работу...</li>
+    </ul>
+    <p><strong>Kanban (Методология визуального управления)</strong></p>
+    <ul>
+      <li>Визуализация задач...</li>
+      <li>Гибкое управление потоком...</li>
+      <li>Ограничение задач (WIP)...</li>
+      <li><strong>Польза:</strong> Kanban позволяет гибко планировать...</li>
+    </ul>
+    <h3>Заключение</h3>
+    <p>Для UX/UI-дизайнера выбор методологии влияет на гибкость в работе и возможность взаимодействия с командой...</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2024 Управление проектами</p>
+</footer>
+
+<!-- Скрипт для открытия и закрытия модального окна -->
+<script>
+  function openModal() {
+    document.getElementById("modal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById("modal");
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+</script>
+
+</body>
+</html>

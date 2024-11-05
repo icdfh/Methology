@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Практическое задание</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>Практическое задание</h1>
+  <nav class="navbar">
+    <a href="index.html">Главная</a>
+    <a href="waterfall.html">Waterfall</a>
+    <a href="agile.html">Agile</a>
+    <a href="scrum.html">Scrum</a>
+    <a href="kanban.html">Kanban</a>
+  </nav>
+</header>
+
+<main class="content">
+  <section>
+    <h2>Задания</h2>
+    <button class="open-modal-btn" onclick="openModal()">Выбрать тему</button>
+    <button class="add-task-btn" onclick="openTaskModal()">Добавить задание</button>
+
+    <h3>Задание по Waterfall</h3>
+    <p>Опишите процесс создания мобильного приложения, разбив его на этапы Waterfall: Анализ, Дизайн, Разработка, Тестирование, Внедрение и Поддержка.</p>
+
+    <h3>Задание по Agile</h3>
+    <p>Создайте концепт веб-сайта по Agile, определив итерации и задачи для каждой: Планирование, Разработка, Тестирование, Внедрение.</p>
+
+    <h3>Задание по Scrum</h3>
+    <p>Опишите структуру спринтов и Product Backlog для разработки чат-бота с использованием Scrum.</p>
+
+    <h3>Задание по Kanban</h3>
+    <p>Создайте Kanban-доску, установите лимиты WIP и анализируйте узкие места.</p>
+  </section>
+</main>
+
+<!-- Модальное окно для выбора темы -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Темы для выполнения задания</h2>
+    <ul>
+      <li>Разработка мобильного приложения для фитнеса</li>
+      <li>Сайт для туристических услуг</li>
+      <li>Чат-бот для поддержки клиентов</li>
+      <li>Приложение для отслеживания расходов</li>
+      <li>Платформа для обмена книгами</li>
+      <li>Кулинарный сайт</li>
+      <li>Органайзер домашних задач</li>
+      <li>Платформа для изучения языков</li>
+      <li>Планировщик тренировок</li>
+      <li>Платформа для фрилансеров</li>
+      <li>Соцсеть для фото</li>
+      <li>Сайт для управления проектами</li>
+      <li>Приложение для заметок</li>
+      <li>Приложение для заказа еды</li>
+      <li>Платформа для обучения</li>
+      <li>Портфолио для художников</li>
+      <li>Онлайн-магазин</li>
+      <li>Приложение для медитации</li>
+      <li>Сайт для путешественников</li>
+      <li>Приложение для управления привычками</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Модальное окно для добавления задания -->
+<div id="taskModal" class="modal">
+  <div class="modal-content task-modal">
+    <span class="close" onclick="closeTaskModal()">&times;</span>
+    <h2>Добавить задание</h2>
+    <form id="taskForm" onsubmit="submitTask(event)">
+      <label for="studentName">Имя студента:</label>
+      <input type="text" id="studentName" required placeholder="Ваше имя">
+      
+      <label for="figmaLink">Ссылка на Figma:</label>
+      <input type="url" id="figmaLink" required placeholder="https://www.figma.com/...">
+      
+      <label for="topic">Тема:</label>
+      <input type="text" id="topic" required placeholder="Выберите тему или введите">
+      
+      <button type="submit">Отправить задание</button>
+    </form>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2024 Управление проектами</p>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAnj0n24uS6vVTVJQJpU-hp11NPyrYts1U",
+    authDomain: "topics-6e260.firebaseapp.com",
+    databaseURL: "https://topics-6e260-default-rtdb.firebaseio.com",
+    projectId: "topics-6e260",
+    storageBucket: "topics-6e260.firebasestorage.app",
+    messagingSenderId: "3918262143",
+    appId: "1:3918262143:web:443a98035c4134f4c5744a",
+    measurementId: "G-2JS98RZPGC"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  console.log("Firebase инициализирован");
+
+  function openModal() {
+    document.getElementById("modal").style.display = "block";
+  }
+  
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  function openTaskModal() {
+    document.getElementById("taskModal").style.display = "block";
+  }
+  
+  function closeTaskModal() {
+    document.getElementById("taskModal").style.display = "none";
+  }
+  
+  function submitTask(event) {
+    event.preventDefault();
+    const studentName = document.getElementById("studentName").value;
+    const figmaLink = document.getElementById("figmaLink").value;
+    const topic = document.getElementById("topic").value;
+
+    if (studentName && figmaLink && topic) {
+      const taskRef = firebase.database().ref("tasks").push();
+      taskRef.set({
+        studentName: studentName,
+        figmaLink: figmaLink,
+        topic: topic
+      }).then(() => {
+        alert("Задание успешно отправлено!");
+        closeTaskModal();
+        document.getElementById("taskForm").reset();
+      }).catch(error => {
+        console.error("Ошибка при отправке задания:", error);
+        alert("Произошла ошибка. Попробуйте снова.");
+      });
+    } else {
+      alert("Пожалуйста, заполните все поля.");
+    }
+  }
+</script>
+
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+  }
+
+  .close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .open-modal-btn, .add-task-btn {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .open-modal-btn:hover, .add-task-btn:hover {
+    background-color: #217dbb;
+  }
+</style>
+
+</body>
+</html>
